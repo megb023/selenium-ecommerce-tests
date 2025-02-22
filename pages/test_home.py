@@ -1,5 +1,5 @@
 """
-This module contains page object for the homepage of https://demo.opencart.com/
+Page object for the homepage of https://demo.opencart.com/
 """
 
 from selenium.webdriver.common.by import By

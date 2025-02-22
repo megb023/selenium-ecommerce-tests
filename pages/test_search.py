@@ -1,5 +1,5 @@
 """
-This module contains page object for the search page of https://demo.opencart.com/
+Page object for the search page of https://demo.opencart.com/
 """
 
 from selenium.webdriver.common.by import By
@@ -15,16 +15,16 @@ class OpenCartSearchPage:
 
     # Interaction Methods
 
-    def search_result_titles(self):
+    def get_result_titles(self):
         results = self.browser.find_elements(*self.SEARCH_RESULTS)
         result_titles = [result.text for result in results]
         return result_titles
     
-    def search_page_title(self):
+    def get_page_title(self):
         page_title = self.browser.find_element(*self.SEARCH_TITLE).text
         return page_title
     
-    def invalid_search_message(self):
+    def get_invalid_message(self):
         invalid_message = self.browser.find_element(*self.INVALID_RESULTS).text
         return invalid_message
 
