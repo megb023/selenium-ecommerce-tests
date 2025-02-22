@@ -27,3 +27,11 @@ def test_remove_item_from_cart():
     # And the cart button shows the cart is empty
 
     # And navigating to the cart confirms no products remain
+
+
+    """ 
+    def test_cart_persistence():
+        # TODO
+    def test_update_cart_quantity():
+        # TODO
+    """
