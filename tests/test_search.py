@@ -8,7 +8,7 @@ from pages.test_search import OpenCartSearchPage
 def test_valid_search(browser):
     home_page = OpenCartHomePage(browser)
     result_page = OpenCartSearchPage(browser)
-    PHRASE = "123"
+    PHRASE = "Macbook"
   
     # Given the opencart home page is displayed
     home_page.load()
@@ -23,3 +23,36 @@ def test_valid_search(browser):
     titles = result_page.search_result_titles()
     matches = [t for t in titles if PHRASE.lower() in t.lower()]
     assert len(matches) > 0 , f"No results contained '{PHRASE}'"
+
+def test_invalid_search(browser):
+    home_page = OpenCartHomePage(browser)
+    result_page = OpenCartSearchPage(browser)
+    PHRASE = "123qwerty"
+    INVALID = "There is no product that matches the search criteria."
+
+    # Given the opencart home page is displayed
+    home_page.load()
+
+    # When the user searches "123qwerty"
+    home_page.search(PHRASE)
+
+    # Then the search result title contains "123qwerty"
+    assert PHRASE.lower() in result_page.search_page_title().lower(), f"Search input 'f{PHRASE}' is not shown in page title"
+
+    # And the search result is a no product match message
+    actual_message = result_page.invalid_search_message()
+    assert actual_message == INVALID, f"Expected message '{INVALID}', but got '{actual_message}'"
+
+def test_empty_search(browser):
+    home_page = OpenCartHomePage(browser)
+    result_page = OpenCartSearchPage(browser)
+    PHRASE = ""
+
+    # Given the opencart home page is displayed
+    home_page.load()
+
+    # When the user searches ""
+    home_page.search(PHRASE)
+
+    # Then the search result title says "Search" only
+    assert result_page.search_page_title() == "Search", "Page title contains something other than 'Search'"
