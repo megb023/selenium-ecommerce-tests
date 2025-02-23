@@ -32,7 +32,7 @@ def browser(config):
     else:
         raise Exception(f'Browser "{config["browser"]}" is not supported')
 
-
+    b.maximize_window()
     b.implicitly_wait(config['implicit_wait'])
     yield b
     b.quit()

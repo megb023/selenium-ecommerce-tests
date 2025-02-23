@@ -1,5 +1,5 @@
 """
-This script tests the search functionality of https://demo.opencart.com/.
+This script tests the search page functionality of https://demo.opencart.com/.
 """
 
 def test_valid_search(home_page, search_page):

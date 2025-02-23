@@ -12,7 +12,4 @@ class OpenCartCartPage:
 
     # Interaction Methods
 
-    def load(self):
-        self.browser.get(self.URL)
 
-    
