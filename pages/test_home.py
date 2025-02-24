@@ -7,9 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
-import time
-
+from pages.test_search import OpenCartSearchPage
 
 class OpenCartHomePage: 
     
@@ -37,6 +35,8 @@ class OpenCartHomePage:
     def search(self, phrase):
         search_input = self.browser.find_element(*self.SEARCH_INPUT)
         search_input.send_keys(phrase + Keys.RETURN)
+
+        return OpenCartSearchPage(self.browser)
 
     def add_item_to_cart(self, item):
         # Find the index of item and scroll to bottom of page
