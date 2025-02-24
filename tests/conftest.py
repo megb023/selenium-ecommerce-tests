@@ -20,7 +20,7 @@ def config(scope='session'):
 
 @pytest.fixture
 def browser(config):
-    # Initialize the WebDriver instance
+    """ Initialize the WebDriver instance"""
     if config['browser'] == 'Firefox':
         b = selenium.webdriver.Firefox()
     elif config['browser'] == 'Chrome':
@@ -39,13 +39,10 @@ def browser(config):
 
 @pytest.fixture
 def home_page(browser):
-    #fixture to initialize and return the opencart home page
+    """fixture to initialize and return the opencart home page"""
     page = OpenCartHomePage(browser)
     page.load()  
     return page
 
-@pytest.fixture
-def search_page(browser):
-    #fixture to initialize and return the opencart search page
-    return OpenCartSearchPage(browser)
+
 
