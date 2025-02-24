@@ -2,7 +2,7 @@ import pytest
 import selenium.webdriver
 import json
 from pages.test_home import OpenCartHomePage
-from pages.test_search import OpenCartSearchPage
+
 
 
 
@@ -44,11 +44,11 @@ def home_page(browser):
     page.load()  
     return page
 
-@pytest.fixture
-def search_page(browser):
-    """Fixture to initialize and return the OpenCart cart page"""
-    page = OpenCartSearchPage(browser)
-    return page
+# @pytest.fixture
+# def search_page(browser):
+#     """Fixture to initialize and return the OpenCart cart page"""
+#     page = OpenCartSearchPage(browser)
+#     return page
 
 
 
