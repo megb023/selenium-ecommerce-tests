@@ -35,7 +35,7 @@ def test_remove_item_from_cart(home_page):
     assert home_page.get_toast_message_text() == "Success: You have removed an item from your shopping cart!"
 
     # And the cart button shows the cart is empty
-    assert home_page.get_cart_button_text() == "0 item(s) - $0.00"
+    assert home_page.get_cart_button_text() == "0 item(s) - $0.001"
 
     # And the cart button dropdown menu is empty
     home_page.wait_for_toast_disappearance()

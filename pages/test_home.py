@@ -41,8 +41,8 @@ class OpenCartHomePage:
         featured_items = self.browser.find_elements(*self.ITEM_NAMES)
         item_names = [i.text for i in featured_items]
         item_location = item_names.index(item)
-        # actions = ActionChains(self.browser)
-        # actions.scroll_by_amount(0, 500).perform()
+        actions = ActionChains(self.browser)
+        actions.scroll_by_amount(0, 500).perform()
 
         # Click the add to cart button for the corresponding item
         self.browser.find_elements(*self.ADD_TO_CART)[item_location].click()
@@ -54,8 +54,8 @@ class OpenCartHomePage:
             )
         )
         # Scroll to top of page
-        # actions = ActionChains(self.browser)
-        # actions.scroll_by_amount(0, -500).perform()
+        actions = ActionChains(self.browser)
+        actions.scroll_by_amount(0, -500).perform()
 
     def get_toast_message_text(self):
         return self.browser.find_element(*self.TOAST_MESSAGE).text

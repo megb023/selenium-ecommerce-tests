@@ -20,9 +20,6 @@ def test_invalid_search(home_page, search_page):
     PHRASE = "123qwerty"
     INVALID_MSG = "There is no product that matches the search criteria."
 
-    # Given the opencart home page is displayed
-    home_page.search(PHRASE)
-
     # When the user searches "123qwerty"
     home_page.search(PHRASE)
 
@@ -35,9 +32,6 @@ def test_invalid_search(home_page, search_page):
 
 def test_empty_search(home_page, search_page):
     PHRASE = ""
-
-    # Given the opencart home page is displayed
-    home_page.search(PHRASE)
 
     # When the user searches ""
     home_page.search(PHRASE)
