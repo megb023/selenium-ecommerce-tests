@@ -2,11 +2,11 @@
 This script tests the search page functionality of https://demo.opencart.com/.
 """
 
-def test_valid_search(home_page):
+def test_valid_search(home_page, search_page):
     PHRASE = "Macbook"
     
     # When the user searches "Macbook"
-    search_page = home_page.search(PHRASE)
+    home_page.search(PHRASE)
 
     # Then the search result title contains "Macbook"
     assert PHRASE.lower() in search_page.get_page_title().lower()
@@ -16,12 +16,12 @@ def test_valid_search(home_page):
     matches = [t for t in titles if PHRASE.lower() in t.lower()]
     assert len(matches) > 0 , f"No results contained '{PHRASE}'"
 
-def test_invalid_search(home_page):
+def test_invalid_search(home_page, search_page):
     PHRASE = "123qwerty"
     INVALID_MSG = "There is no product that matches the search criteria."
 
     # Given the opencart home page is displayed
-    search_page = home_page.search(PHRASE)
+    home_page.search(PHRASE)
 
     # When the user searches "123qwerty"
     home_page.search(PHRASE)
@@ -33,11 +33,11 @@ def test_invalid_search(home_page):
     actual_message = search_page.get_invalid_message()
     assert actual_message == INVALID_MSG, f"Expected message '{INVALID_MSG}', but got '{actual_message}'"
 
-def test_empty_search(home_page):
+def test_empty_search(home_page, search_page):
     PHRASE = ""
 
     # Given the opencart home page is displayed
-    search_page = home_page.search(PHRASE)
+    home_page.search(PHRASE)
 
     # When the user searches ""
     home_page.search(PHRASE)

@@ -22,7 +22,7 @@ class OpenCartSearchPage:
     
     def get_page_title(self):
         page_title = self.browser.find_element(*self.SEARCH_TITLE).text
-        return page_title
+        return page_title 
     
     def get_invalid_message(self):
         invalid_message = self.browser.find_element(*self.INVALID_RESULTS).text

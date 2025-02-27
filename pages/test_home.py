@@ -7,7 +7,6 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from pages.test_search import OpenCartSearchPage
 
 class OpenCartHomePage: 
     
@@ -21,6 +20,7 @@ class OpenCartHomePage:
     DROPDOWN_MENU_ITEM_NAME = (By.CSS_SELECTOR, '#header-cart ul .text-start :nth-child(1)')
     DROPDOWN_REMOVE_BUTTON = (By.CSS_SELECTOR, ".dropdown-menu i.fa-circle-xmark")
     DROPDOWN_EMPTY_MESSAGE = (By.CSS_SELECTOR, 'li.text-center')
+    CART_BUTTON_HEADER = (By.CSS_SELECTOR, 'a[title="Shopping Cart"]')
 
     
 
@@ -36,15 +36,13 @@ class OpenCartHomePage:
         search_input = self.browser.find_element(*self.SEARCH_INPUT)
         search_input.send_keys(phrase + Keys.RETURN)
 
-        return OpenCartSearchPage(self.browser)
-
     def add_item_to_cart(self, item):
         # Find the index of item and scroll to bottom of page
         featured_items = self.browser.find_elements(*self.ITEM_NAMES)
         item_names = [i.text for i in featured_items]
         item_location = item_names.index(item)
-        actions = ActionChains(self.browser)
-        actions.scroll_by_amount(0, 500).perform()
+        # actions = ActionChains(self.browser)
+        # actions.scroll_by_amount(0, 500).perform()
 
         # Click the add to cart button for the corresponding item
         self.browser.find_elements(*self.ADD_TO_CART)[item_location].click()
@@ -56,8 +54,8 @@ class OpenCartHomePage:
             )
         )
         # Scroll to top of page
-        actions = ActionChains(self.browser)
-        actions.scroll_by_amount(0, -500).perform()
+        # actions = ActionChains(self.browser)
+        # actions.scroll_by_amount(0, -500).perform()
 
     def get_toast_message_text(self):
         return self.browser.find_element(*self.TOAST_MESSAGE).text
@@ -87,3 +85,10 @@ class OpenCartHomePage:
     
     def get_empty_dropdown_text(self):
         return self.browser.find_element(*self.DROPDOWN_EMPTY_MESSAGE).text
+    
+    def go_to_cart_page(self):
+        self.browser.find_element(*self.CART_BUTTON_HEADER).click()
+
+    def refresh_page(self):
+        self.browser.refresh()
+
