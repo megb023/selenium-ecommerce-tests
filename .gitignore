@@ -1,6 +1,21 @@
-reports/
-__pycache__/
-.pytest_cache/
+# Virtual environment
 venv/
-.vscode
-assets/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Test reports and logs
+reports/
+report.html
+
+# Pytest cache
+.pytest_cache/
+
+# VSCode settings
+.vscode/
+
+# Config files (only include config.example.json)
+config.json
