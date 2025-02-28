@@ -70,7 +70,7 @@ def pytest_runtest_makereport(item):
             # Get the browser instance from fixtures
             browser = item.funcargs.get("browser")  
             if browser:
-                reports_dir = os.path.join(os.path.dirname(__file__), "reports")
+                reports_dir = os.path.join(os.path.dirname(__file__), "reports", "tests")
                 os.makedirs(reports_dir, exist_ok=True)  # Ensure the directory exists
                 
                 relative_path = os.path.join("reports", report.nodeid.replace("::", "_") + ".png")
@@ -78,7 +78,6 @@ def pytest_runtest_makereport(item):
                 print(f"Saving screenshot to: {absolute_path}")
                 _capture_screenshot(browser, absolute_path)  # Pass browser to function
 
-                # Fixing the 'scr' typo to 'src'
                 html = (
                     f'<div><img src="{relative_path}" alt="screenshot" style="width:304px;height:228px;" '
                     'onclick="window.open(this.src)" align="right"/></div>'
