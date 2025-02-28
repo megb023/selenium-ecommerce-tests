@@ -1,41 +1,32 @@
 import os
 
 import pytest
-import selenium.webdriver
-import json
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from pages.test_home import OpenCartHomePage
 from pages.test_search import OpenCartSearchPage
 from pages.test_cart import OpenCartCartPage
 
-@pytest.fixture
-def config(scope='session'):
-    with open('config.json') as config_file:
-        config = json.load(config_file)
+def pytest_addoption(parser):
+    parser.addoption(
+        "--browser_name", action="store", default="Chrome", help="browser selection"
+    )
 
-    assert config['browser'] in ['Firefox', 'Chrome', 'Headless Chrome']
-    assert isinstance(config['implicit_wait'], int)
-    assert config['implicit_wait'] > 0
+@pytest.fixture(scope="function")
+def browser(request):
+    browser_name = request.config.getoption("--browser_name")
+    service_obj = Service()
+    if browser_name == "Chrome":
+        browser = webdriver.Chrome(service=service_obj)
+    elif browser_name == "Firefox":
+        browser=webdriver.Firefox(service=service_obj)
 
-    return config
+    browser.implicitly_wait(5)
+    browser.maximize_window()
 
-@pytest.fixture
-def browser(config):
-    """ Initialize the webdriver instance"""
-    if config['browser'] == 'Firefox':
-        b = selenium.webdriver.Firefox()
-    elif config['browser'] == 'Chrome':
-        b = selenium.webdriver.Chrome()
-    elif config['browser'] == 'Headless Chrome':
-        opts = selenium.webdriver.ChromeOptions()
-        opts.add_argument('headless')
-        b = selenium.webdriver.Chrome(options=opts)
-    else:
-        raise Exception(f'Browser "{config["browser"]}" is not supported')
+    yield browser
 
-    b.maximize_window()
-    b.implicitly_wait(config['implicit_wait'])
-    yield b
-    b.quit()
+    browser.quit()
 
 @pytest.fixture
 def home_page(browser):
